@@ -18,10 +18,3 @@ function getData() {
 
 let finalValue = formatQuizlet(getData());
 chrome.runtime.sendMessage({ type: "quizletString", quizletString: finalValue });
-chrome.storage.session.set({ "quizletString": finalValue });
-
-async function getCurrentTabId() {
-  var currentTab = await chrome.runtime.sendMessage({ request: "getCurrentTabId" });
-  console.log(currentTab);
-  return currentTab;
-}

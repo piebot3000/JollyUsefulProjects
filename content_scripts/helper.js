@@ -25,3 +25,10 @@ function getSourceAsDOM(url) {
    parser = new DOMParser();
    return parser.parseFromString(xmlhttp.responseText, "text/html");
 }
+
+async function getCurrentTab() {
+  let queryOptions = { active: true, lastFocusedWindow: true };
+  // `tab` will either be a `tabs.Tab` instance or `undefined`.
+  let [tab] = await chrome.tabs.query(queryOptions);
+  return tab;
+}

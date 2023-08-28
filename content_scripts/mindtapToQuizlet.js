@@ -37,7 +37,6 @@ function getFillInData() {
   return results;
 }
 
-
 setTimeout(function() {
   //make sure were done with the assignment
   if(document.querySelector("h2").innerText === "Take Details"){
@@ -51,6 +50,5 @@ setTimeout(function() {
     }
     
     chrome.runtime.sendMessage({ type: "quizletString", quizletString: finalValue });
-    chrome.storage.session.set({ "quizletString": finalValue });
   }
 }, 4000);
