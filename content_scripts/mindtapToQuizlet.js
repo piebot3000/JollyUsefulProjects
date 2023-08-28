@@ -41,12 +41,13 @@ function getFillInData() {
 setTimeout(function() {
   //make sure were done with the assignment
   if(document.querySelector("h2").innerText === "Take Details"){
+    var finalValue;
     //if its a TD then its fill in the blank
     if(document.querySelector(".problemTypes").tagName === "TD") {
-      let finalValue = formatQuizlet(getFillInData());
+      var finalValue = formatQuizlet(getFillInData());
     //otherwise its a multiple choice
     } else {
-      let finalValue = formatQuizlet(getMultipleChoiceData());
+      var finalValue = formatQuizlet(getMultipleChoiceData());
     }
     
     chrome.runtime.sendMessage({ type: "quizletString", quizletString: finalValue });
