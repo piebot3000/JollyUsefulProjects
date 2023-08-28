@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "The Gus Meister",
+  "description": "Gus's personal box of tricks",
+  "version": "1.0.3",
+  "icons": {
+    "16": "icons/favicon-16x16.png",
+    "32": "icons/favicon-32x32.png"
+  },
+  "permissions": ["activeTab", "scripting", "storage", "tabs"],
+
+  "background": {
+    "service_worker": "background.js"
+  },
+  
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content_scripts/helper.js"],
+      "all_frames": true
+    },
+    {
+      "matches": ["https://ati.instructure.com/courses/*/quizzes/*"],
+      "js": ["content_scripts/canvasToQuizlet.js"]
+    },
+    {
+      "matches": ["https://cnow.apps.ng.cengage.com/*"],
+      "js": ["content_scripts/mindtapToQuizlet.js"],
+      "all_frames": true
+    }
+  ],
+
+  "action": {
+    "default_icon": {
+      "16": "icons/favicon-16x16.png",
+      "32": "icons/favicon-32x32.png"
+    },
+    "default_popup": "index.html"
+  }
+}
