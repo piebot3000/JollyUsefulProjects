@@ -1,5 +1,6 @@
 console.log("GUS: helper.js loaded");
 
+//format a array of question objects { question: string, answer: string } into a string quizlet can import
 function formatQuizlet(questions) {
   const COLUMN_DELIM = "----";
   const ROW_DELIM = "||||";
@@ -18,6 +19,7 @@ function formatQuizlet(questions) {
   return buffer;
 }
 
+//grab the dom of a url
 function getSourceAsDOM(url) {
    xmlhttp = new XMLHttpRequest();
    xmlhttp.open("GET", url, false);
@@ -26,6 +28,7 @@ function getSourceAsDOM(url) {
    return parser.parseFromString(xmlhttp.responseText, "text/html");
 }
 
+//get the currently focused tab
 async function getCurrentTab() {
   let queryOptions = { active: true, lastFocusedWindow: true };
   // `tab` will either be a `tabs.Tab` instance or `undefined`.
