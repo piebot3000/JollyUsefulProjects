@@ -11,7 +11,11 @@ function onload() {
 
     //get the data and update the textarea to the result or a default text
     chrome.storage.session.get(keyString).then((result) => {
-      document.querySelector("#quizletBox").value = result[keyString] || "If theres data to get it will be here.";
+      document.querySelector("#quizletcopy").title = result[keyString] || "If theres data to get it will be here.";
+      if(result[keyString]) {
+        document.querySelector("#quizletcopy").classList.remove('w3-red')
+        document.querySelector("#quizletcopy").classList.add("w3-green")
+      }
     });
   })
 }
@@ -21,7 +25,9 @@ chrome.runtime.onMessage.addListener((message, sender) => {
   //if this is our message
   if (message.type === "quizletString") {
     //update the textarea immediatly
-    document.querySelector("#quizletBox").value = message.quizletString;
+    document.querySelector("#quizletcopy").title = message.quizletString;
+    document.querySelector("#quizletcopy").classList.remove('w3-red')
+    document.querySelector("#quizletcopy").classList.add("w3-green")
   }
 });
 
