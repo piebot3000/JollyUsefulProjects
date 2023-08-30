@@ -19,7 +19,7 @@ function getMultipleChoiceData() {
     var answerText = doc.querySelector("input:checked").parentElement.nextElementSibling.innerText;
 
     //add that to the results array
-    results.push({question: questionText, answer: answerText});
+    results.push({ question: questionText, answer: answerText });
   }
 
   return results;
@@ -46,12 +46,12 @@ function getFillInData() {
 //small delay to make sure the page loads everything
 setTimeout(function() {
   //make sure were done with the assignment
-  if(document.querySelector("h2").innerText === "Take Details"){
+  if (document.querySelector("h2").innerText === "Take Details") {
     var finalValue;
     //if its a TD then its fill in the blank
-    if(document.querySelector(".problemTypes").tagName === "TD") {
+    if (document.querySelector(".problemTypes").tagName === "TD") {
       var finalValue = formatQuizlet(getFillInData());
-    //otherwise its a multiple choice
+      //otherwise its a multiple choice
     } else {
       var finalValue = formatQuizlet(getMultipleChoiceData());
     }

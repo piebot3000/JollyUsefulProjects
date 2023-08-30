@@ -19,7 +19,7 @@ function onload() {
 //message listener for getting quizlet strings
 chrome.runtime.onMessage.addListener((message, sender) => {
   //if this is our message
-  if(message.type === "quizletString") {
+  if (message.type === "quizletString") {
     //update the textarea immediatly
     document.querySelector("#quizletBox").value = message.quizletString;
   }

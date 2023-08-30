@@ -10,9 +10,9 @@ function getData() {
   for (var i = 0; i < questions.length; i++) {
     let questionText = questions[i].textContent.trim();
     let answerText = answers[i].title.replace(REMOVE_FROM_ANSWER, "").replace(". This was the correct answer.", "").trim();
-    results.push({question: questionText, answer: answerText})
+    results.push({ question: questionText, answer: answerText })
   }
-  
+
   return results;
 }
 
