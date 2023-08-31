@@ -39,4 +39,10 @@ chrome.runtime.onMessage.addListener((message, sender) => {
 function quizletCopyClick() {
   //copy text to clipboard
   navigator.clipboard.writeText(quizletCopyButton.title);
+
+  //popup the success bar for a few seconds
+  document.querySelector("#successPopupText").innerText = quizletCopyButton.title;
+  var successPopup = document.querySelector("#successPopup");
+  successPopup.style.display = "block";
+  setTimeout(() => { successPopup.style.display = "none"; }, 2000);
 }

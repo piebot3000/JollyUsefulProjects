@@ -12,12 +12,23 @@
   <script src="popup_script.js"></script>
 
   <style>
-    @font-face { font-family: lekerli; src: URL("/icons/lekerli-font.ttf") }
+    @font-face {
+      font-family: lekerli;
+      src: URL("/icons/lekerli-font.ttf")
+    }
+
     html {
       width: 750px;
       /* max: 1000px */
       height: 600px;
       /* max: 750px */
+    }
+
+    #successPopup {
+      display: none;
+      position: fixed;
+      bottom: 0px;
+      width: 100%;
     }
   </style>
 </head>
@@ -25,7 +36,7 @@
 <body>
   <img class="w3-margin w3-left" src="/icons/favicon.ico">
   <h1 class="w3-cursive" style="display:inline-flex; font-family: lekerli;">Gus's Fun Shack</h1>
-  
+
   <div class="w3-bar w3-blue">
     <a class="w3-bar-item w3-hover-light-blue w3-button" href="https://learning.auto.edu" target="_blank">ATI</a>
     <a class="w3-bar-item w3-hover-light-blue w3-button" href="https://ati.instructure.com/courses/3978/modules"
@@ -33,13 +44,19 @@
     <a class="w3-bar-item w3-hover-light-blue w3-button"
       href="https://quizlet.com/courses/10250207-steering-and-alignment/schools/3106013-advanced-technology-institute/?funnelUUID=6340cd31-d5ac-4a76-aabe-82575552ecfa"
       target="_blank">Quizlet</a>
-    <a class="w3-bar-item w3-hover-light-blue w3-button" href="https://orteil.dashnet.org/cookieclicker/" 
+    <a class="w3-bar-item w3-hover-light-blue w3-button" href="https://orteil.dashnet.org/cookieclicker/"
       target="_blank">Cookie Clicker</a>
     <a class="w3-bar-item w3-hover-light-blue w3-button" href="https://replit.com/@SageWynn/JollyUsefulProjects"
       target="_blank">CodeBase</a>
   </div>
 
-  <button class="w3-button w3-round-large w3-red w3-hover-light-blue" title="If theres data to get it will show here." id="quizletCopyButton">Copy Quizlet Output</button>
+  <button class="w3-button w3-round-large w3-red w3-hover-light-blue" title="If theres data to get it will show here."
+    id="quizletCopyButton">Copy Quizlet Output</button>
+
+  <div class="w3-container w3-green" id="successPopup">
+    <h3>Success! Copied this text to your clipboard:</h3>
+    <p id="successPopupText"></p>
+  </div>
 </body>
 
 </html>
