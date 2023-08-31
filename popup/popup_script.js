@@ -1,8 +1,13 @@
+var quizletCopyButton;
+
 //add our on load stuff
 window.addEventListener("load", onload, false);
 function onload() {
+  //get our button and save it
+  quizletCopyButton = document.querySelector("#quizletCopyButton");
+  
   //setup on click events
-  document.getElementById("quizletcopy").addEventListener("click", quizletCopyClick);
+  quizletCopyButton.addEventListener("click", quizletCopyClick);
 
   //get the current string for this tab
   getCurrentTab().then((tab) => {
@@ -11,10 +16,10 @@ function onload() {
 
     //get the data and update the textarea to the result or a default text
     chrome.storage.session.get(keyString).then((result) => {
-      document.querySelector("#quizletcopy").title = result[keyString] || "If theres data to get it will be here.";
+      quizletCopyButton.title = result[keyString] || "If theres data to get it will be here.";
       if(result[keyString]) {
-        document.querySelector("#quizletcopy").classList.remove('w3-red')
-        document.querySelector("#quizletcopy").classList.add("w3-green")
+        quizletCopyButton.classList.remove('w3-red')
+        quizletCopyButton.classList.add("w3-green")
       }
     });
   })
@@ -25,14 +30,13 @@ chrome.runtime.onMessage.addListener((message, sender) => {
   //if this is our message
   if (message.type === "quizletString") {
     //update the textarea immediatly
-    document.querySelector("#quizletcopy").title = message.quizletString;
-    document.querySelector("#quizletcopy").classList.remove('w3-red')
-    document.querySelector("#quizletcopy").classList.add("w3-green")
+    quizletCopyButton.title = message.quizletString;
+    quizletCopyButton.classList.remove('w3-red')
+    quizletCopyButton.classList.add("w3-green")
   }
 });
 
 function quizletCopyClick() {
-  //copy text to clipboard and change button color to green
-  navigator.clipboard.writeText(document.querySelector("#quizletcopy").title);
-  document.getElementById("quizletcopy").classList.add("w3-green");
+  //copy text to clipboard
+  navigator.clipboard.writeText(quizletCopyButton.title);
 }
