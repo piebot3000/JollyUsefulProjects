@@ -33,6 +33,6 @@ chrome.runtime.onMessage.addListener((message, sender) => {
 
 function quizletCopyClick() {
   //copy text to clipboard and change button color to green
-  navigator.clipboard.writeText(document.querySelector("#quizletBox").value);
+  navigator.clipboard.writeText(document.querySelector("#quizletcopy").title);
   document.getElementById("quizletcopy").classList.add("w3-green");
 }
