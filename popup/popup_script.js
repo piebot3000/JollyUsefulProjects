@@ -1,5 +1,31 @@
 var quizletCopyButton;
 
+function formatQuizlet(questions) {
+  const COLUMN_DELIM = "----";
+  const ROW_DELIM = "||||";
+
+  var buffer = "";
+  for (i of questions) {
+    buffer += i.question;
+    buffer += COLUMN_DELIM;
+    buffer += i.answer;
+    buffer += ROW_DELIM;
+  }
+
+  buffer = buffer.replace(/(\r\n|\n|\r)/gm, "");
+  buffer = buffer.replace(/ +(?= )/g, '');
+
+  return buffer;
+}
+
+//get the currently focused tab
+async function getCurrentTab() {
+  let queryOptions = { active: true, lastFocusedWindow: true };
+  // `tab` will either be a `tabs.Tab` instance or `undefined`.
+  let [tab] = await chrome.tabs.query(queryOptions);
+  return tab;
+}
+
 //add our on load stuff
 window.addEventListener("load", onload, false);
 function onload() {
@@ -28,9 +54,9 @@ function onload() {
 //message listener for getting quizlet strings
 chrome.runtime.onMessage.addListener((message, sender) => {
   //if this is our message
-  if (message.type === "quizletString") {
+  if (message.quizletQuestions) {
     //update the textarea immediatly
-    quizletCopyButton.title = message.quizletString;
+    quizletCopyButton.title = formatQuizlet(message.quizletString);
     quizletCopyButton.classList.remove('w3-red')
     quizletCopyButton.classList.add("w3-green")
   }

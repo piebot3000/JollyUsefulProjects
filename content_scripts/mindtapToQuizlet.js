@@ -5,6 +5,15 @@ function getQuestionLinks() {
   return [...document.querySelectorAll("a")].map((a) => a.href);
 }
 
+//grab the dom of a url
+function getSourceAsDOM(url) {
+  xmlhttp = new XMLHttpRequest();
+  xmlhttp.open("GET", url, false);
+  xmlhttp.send();
+  parser = new DOMParser();
+  return parser.parseFromString(xmlhttp.responseText, "text/html");
+}
+
 function getMultipleChoiceData() {
   var results = [];
 
@@ -50,13 +59,13 @@ setTimeout(function() {
     var finalValue;
     //if its a TD then its fill in the blank
     if (document.querySelector(".problemTypes").tagName === "TD") {
-      var finalValue = formatQuizlet(getFillInData());
+      var finalValue = getFillInData();
       //otherwise its a multiple choice
     } else {
-      var finalValue = formatQuizlet(getMultipleChoiceData());
+      var finalValue = getMultipleChoiceData();
     }
 
     //send the data
-    chrome.runtime.sendMessage({ type: "quizletString", quizletString: finalValue });
+    chrome.runtime.sendMessage({ quizletQuestions: true, quizletString: finalValue });
   }
 }, 4000);
