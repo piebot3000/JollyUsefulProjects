@@ -66,6 +66,6 @@ setTimeout(function() {
     }
 
     //send the data
-    chrome.runtime.sendMessage({ quizletQuestions: true, quizletString: finalValue });
+    chrome.runtime.sendMessage({ quizletQuestions: true, quizletData: finalValue });
   }
 }, 4000);

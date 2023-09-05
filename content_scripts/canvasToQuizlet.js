@@ -16,4 +16,4 @@ function getData() {
   return results;
 }
 
-chrome.runtime.sendMessage({ quizletQuestions: true, quizletString: getData() });
+chrome.runtime.sendMessage({ quizletQuestions: true, quizletData: getData() });

@@ -22,7 +22,11 @@ chrome.runtime.onMessage.addListener((message, sender) => {
     //get the key the data for this tab will be under
     let storageKey = "quizletString" + sender.tab.id;
 
+    let formattedData = formatQuizlet(message.quizletData);
     //set the key to the string
-    chrome.storage.session.set({ [storageKey]: formatQuizlet(message.quizletString) });
+    chrome.storage.session.set({ [storageKey]: formattedData });
+
+    //send a message to the popup to instantly update it
+    chrome.runtime.sendMessage({ quizletString: true, quizletData: formattedData });
   }
 });
