@@ -2,7 +2,8 @@ console.log("GUS: mindtapToQuizlet.js loaded");
 
 //grab all the question links in the page
 function getQuestionLinks() {
-  return [...document.querySelectorAll("a")].map((a) => a.href);
+  var questionContainer = document.querySelector("#question-numbers-scroll");
+  return [...questionContainer.querySelectorAll("a")].map((a) => a.href);
 }
 
 //grab the dom of a url
@@ -37,16 +38,41 @@ function getMultipleChoiceData() {
 //WIP
 function getFillInData() {
   var results = [];
+
+  //check all questions
   for (i of getQuestionLinks()) {
-    doc = getSourceAsDOM(i);
+    //get each questions dom without relaoding the page a bunch
+    var doc = getSourceAsDOM(i);
 
-    //get the question text
-    var questionText = doc.querySelector("div.problemTypes").innerText;
-    console.log(questionText);
-    //get answer text
-    //var answerText = doc.querySelector("input:checked").parentElement.nextElementSibling.innerText;
+    //get our answer text first so we dont delete it in the next steps
+    //all our answers are in the .control-value span
+    var answerContainer = Array.from(doc.querySelectorAll(".control-value"));
 
-    //results.push({question: questionText, answer: answerText});
+    //important to note we may have multiple answers
+    //the first child of each of our containers is a input containing our answer as the value
+    var answers = answerContainer.map(node => node.childNodes[0].value);
+
+    //join them nice to return
+    var answerText = answers.join(", ");
+
+    //our question lives in div.problemTypes
+    var div = doc.querySelector("div.problemTypes");
+    //remove unnecessary data since theres a ton and its easier to extract what we want
+    [...div.children].forEach((node) => node.remove());
+
+    //we can check which text nodes contain our data by seeing if they are not whitespace
+    var filtered = [...div.childNodes].filter((node) => node.textContent.trim() !== '')
+      //then get the text content of all the nodes
+      .map(x => x.textContent);
+
+    var answerAmount = filtered.length - 1;
+
+    //each part of the question needs to be joined by a "_____" to introduce the blank
+    //this is now our completed question text
+    var questionText = filtered.join("_____");
+
+    
+    results.push({ question: questionText, answer: answerText });
   }
 
   return results;
