@@ -35,7 +35,6 @@ function getMultipleChoiceData() {
   return results;
 }
 
-//WIP
 function getFillInData() {
   var results = [];
 
