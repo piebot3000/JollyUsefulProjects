@@ -33,7 +33,7 @@ var cookin = {
   startAutoGold: function() {
     var int = setInterval(() => {
       Game.shimmers.forEach((s) => { 
-        if(shimmer.type == "golden" && shimmer.wrath == 0) {
+        if(s.type == "golden" && s.wrath == 0) {
           s.pop(); 
           this.logger.log("Popped Golden Cookie"); 
         } else {
