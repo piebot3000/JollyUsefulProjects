@@ -40,6 +40,8 @@ var cookin = {
           if(this.clickWrath) {
             s.pop();
             this.logger.log("Popped Wrath Cookie");
+          } else if (s.type == "reindeer") {
+            s.pop("Popped Reindeer");
           } else {
             this.logger.log("Skipped Wrath Cookie");
           }
@@ -50,13 +52,26 @@ var cookin = {
     this.ints.push(int);
   },
 
+  //TODO: startAutoClick
+
+  start: function() {
+    this.startAutoGold();
+    this.startAutoBuy();
+  },
+
   clearIntervals: function() {
-    this.ints.forEach((i) => { clearInterval(i) });
+    this.ints.forEach(clearInterval);
     this.ints = [];
   },
 
   luckyPriceDiff: function() {
     return Beautify(this.luckyPrice() - Game.cookies);
+  },
+
+  bigCombo: function() {
+    Game.gainBuff("click frenzy", 10, 777);
+    Game.gainBuff("frenzy", 10, 7);
+    Game.gainBuff("building buff", 10, 10, 0);
   }
 }
 
