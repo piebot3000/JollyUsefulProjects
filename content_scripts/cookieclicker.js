@@ -52,11 +52,15 @@ var cookin = {
     this.ints.push(int);
   },
 
-  //TODO: startAutoClick
+  startAutoClick: function() {
+    var int = setInterval(Game.clickCookie, 200);
+    this.ints.push(int);
+  },
 
   start: function() {
     this.startAutoGold();
     this.startAutoBuy();
+    this.startAutoClick();
   },
 
   clearIntervals: function() {
